@@ -1,0 +1,195 @@
+/* Stili per i bottoni */
+body{
+	font-family: Consolas,monaco,monospace;
+    position: absolute;
+    height: 99%;
+    width: 99%;
+    background:#fff url(affariTuoi.jpg) no-repeat;
+	background-size: cover;
+}
+
+#lightBlue1{
+    left : -0.6%;
+    top : 16%;
+}
+
+#lightBlue2{
+    left : -0.6%;
+    top : 23%;
+}
+
+#lightBlue3{
+    left : -0.6%;
+    top : 30%;
+}
+
+#lightBlue4{
+    left : -0.6%;
+    top : 37%;
+}
+
+#lightBlue5{
+    left : -0.6%;
+    top : 44%;
+}
+
+#blue6{
+    left : -0.6%;
+    top : 51%;
+}
+
+#blue7{
+    left : -0.6%;
+    top : 58%;
+}
+
+#blue8{
+    left : -0.6%;
+    top : 65%;
+}
+
+#blue9{
+    left : -0.6%;
+    top : 72%;
+}
+
+#blue10{
+    left : -0.6%;
+    top : 79%;
+}
+
+#red1{
+    right : -0.6%;
+    top : 16%;
+}
+
+#red2{
+    right : -0.6%;
+    top : 23%;
+}
+
+#red3{
+    right : -0.6%;
+    top : 30%;
+}
+
+#red4{
+    right : -0.6%;
+    top : 37%;
+}
+
+#red5{
+    right : -0.6%;
+    top : 44%;
+}
+
+#red6{
+    right : -0.6%;
+    top : 51%;
+}
+
+#red7{
+    right : -0.6%;
+    top : 58%;
+}
+
+#red8{
+    right : -0.6%;
+    top : 65%;
+}
+
+#red9{
+    right : -0.6%;
+    top : 72%;
+}
+
+#red10{
+    right : -0.6%;
+    top : 79%;
+}
+
+#premioSinistra{
+    left : -0.6%;
+    top : 85%;
+}
+
+#premioDestra{
+    right : -0.6%;
+    top : 85%;
+}
+
+#readFileBlue{
+    left : 1%;
+	width : 400px;
+    height: 40px;
+    font-size: 30px;
+	padding: 1% 1%;
+    top : 90%;
+}
+
+#readFileRed{
+    right : 1%;
+	width : 400px;
+    height: 40px;
+    font-size: 30px;
+	padding: 1% 1%;
+    top : 90%;
+}
+
+#myTextBox{
+	position: absolute;
+    border: 2px solid #00000;
+    color: white;
+    padding: 0% 1%;
+    font-family: arial black;
+    right : 34.5%;
+	width : 550px;
+    height: 60px;
+    font-size: 80px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	font-style: bold;
+	background-color: rgba(204, 204, 0, 0.7);
+    text-align: center;
+	padding: 1% 1%;
+    top : 85%;
+	border-radius: 8px;  
+	box-shadow: 0 0 10px white;
+}
+
+.btn {
+  position: absolute;
+  cursor: pointer;
+  border: 2px solid #000000;
+  color: white;
+  padding: 0% 1%;
+  font-family: fantasy;
+  /* 1 pixel black shadow to left, top, right and bottom */
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  /*font-size: 200%;*/
+  font-size: 40px;
+  font-style: bold;
+  width: 350px;
+  height: 50px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px white;
+}
+
+/* Stili per i bottoni blu */
+.blue {
+  background-color: rgba(0, 0, 255, 0.7);
+  text-align: right;
+}
+
+/* Stili per i bottoni azzurri chiari */
+.lightBlue {
+  background-color: rgba(0, 128, 255, 0.7);
+  /*background: linear-gradient(lightBlue, blue 45%, lightBlue);*/
+  text-align: right;
+}
+
+/* Stili per i bottoni rossi */
+.red {
+  background-color: rgba(255, 0, 0, 0.7);
+  text-align: left;
+}
+

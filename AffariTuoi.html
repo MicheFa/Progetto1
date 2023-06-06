@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="at.css">
+</head>
+
+<body onkeydown="checkKey(event)">
+  <script>
+    var numeroPacchiRimasti = 20;
+
+    function startBlueBtn() {
+      for (i = 0; i < 5; i++) {
+        //console.log(blueContent[i]);
+        var buttonText = blueContent[i];
+        var button = document.createElement('button');
+        button.textContent = buttonText;
+        button.setAttribute('id', 'lightBlue' + (i + 1));
+        button.setAttribute('class', 'btn lightBlue');
+        button.setAttribute('onclick', 'clearText(this)');
+        button.setAttribute('ondblclick', 'recoverLast(this)');
+        document.getElementById('gameContainer').appendChild(button);
+      }
+
+      for (i = 5; i < 10; i++) {
+        //console.log(blueContent[i]);
+        var buttonText = blueContent[i];
+        var button = document.createElement('button');
+        button.textContent = buttonText;
+        button.setAttribute('id', 'blue' + (i + 1));
+        button.setAttribute('class', 'btn blue');
+        button.setAttribute('onclick', 'clearText(this)');
+        button.setAttribute('ondblclick', 'recoverLast(this)');
+        document.getElementById('gameContainer').appendChild(button);
+      }
+      playAudioLista();
+    }
+
+    function startRedBtn() {
+      for (i = 0; i < 10; i++) {
+        var buttonText = redContent[i];
+        var button = document.createElement('button');
+        button.textContent = buttonText;
+        button.setAttribute('id', 'red' + (i + 1));
+        button.setAttribute('class', 'btn red');
+        button.setAttribute('onclick', 'clearText(this)');
+        button.setAttribute('ondblclick', 'recoverLast(this)');
+        document.getElementById('gameContainer').appendChild(button);
+      }
+      playAudioLista();
+    }
+
+    function clearText(e) {
+      if (e.innerText != '') {
+        numeroPacchiRimasti = numeroPacchiRimasti - 1;
+        if (e.className == "btn red") {
+          playAudioPaccoRosso();
+        } else {
+          playAudioPaccoBlu();
+        }
+        e.innerText = '';
+        e.style.width = "5px";
+        var currentBackground = getComputedStyle(e).background;
+        var rgbaColor = currentBackground.replace('0.7)', '0.1)');
+        e.style.background = rgbaColor;
+        if (numeroPacchiRimasti === 2) {
+          ultimiDuePremi();
+        }
+        //console.log(numeroPacchiRimasti);
+      }
+    }
+
+    function recoverLast(e) {
+      if (e.innerText === '') {
+        var sub1 = "";
+        if (e.className === 'btn red') {
+          sub1 = e.id.replace("red", "");
+          e.textContent = redContent[sub1 - 1];
+        } else if (e.className === 'btn blue') {
+          sub1 = e.id.replace("blue", "");
+          e.textContent = blueContent[sub1 - 1];
+        } else {
+          sub1 = e.id.replace("lightBlue", "");
+          e.textContent = blueContent[sub1 - 1];
+        }
+        var currentBackground = getComputedStyle(e).background;
+        var rgbaColor = currentBackground.replace('0.1)', '0.7)');
+        e.style.background = rgbaColor;
+        e.style.width = "350px";
+        numeroPacchiRimasti = numeroPacchiRimasti + 1;
+        //console.log(numeroPacchiRimasti);
+      }
+    }
+
+    function ultimiDuePremi() {
+      //console.log("Ultimi due premi");
+      var contatore = 0;
+      var premioSinistra = '';
+      var premioDestra = '';
+      var idElemeto = '';
+      var buttonText = '';
+      var idPremioSinistra = '';
+      var idPremioDestra = '';
+
+      if (contatore != 2) {
+        for (i = 1; i < 6; i++) {
+          idElemento = 'lightBlue' + i;
+          buttonText = document.getElementById(idElemento).textContent || document.getElementById(idElemento).innerText;
+          if (buttonText != '') {
+            contatore = contatore + 1;
+            //console.log(contatore);
+            //console.log(buttonText);
+            if (contatore === 1) {
+              idPremioSinistra = idElemento;
+              premioSinistra = buttonText;
+            }
+            if (contatore === 2) {
+              idPremioDestra = idElemento;
+              premioDestra = buttonText;
+              continue;
+            }
+          }
+        }
+      }
+
+      if (contatore != 2) {
+        for (i = 6; i < 11; i++) {
+          idElemento = 'blue' + i;
+          buttonText = document.getElementById(idElemento).textContent || document.getElementById(idElemento).innerText;
+          if (buttonText != '') {
+            contatore = contatore + 1;
+            //console.log(contatore);
+            //console.log(buttonText);
+            if (contatore === 1) {
+              idPremioSinistra = idElemento;
+              premioSinistra = buttonText;
+            }
+            if (contatore === 2) {
+              idPremioDestra = idElemento;
+              premioDestra = buttonText;
+              continue;
+            }
+          }
+        }
+      }
+
+      if (contatore != 2) {
+        for (i = 1; i < 11; i++) {
+          idElemento = 'red' + i;
+          buttonText = document.getElementById(idElemento).textContent || document.getElementById(idElemento).innerText;
+          if (buttonText != '') {
+            contatore = contatore + 1;
+            //console.log(contatore);
+            //console.log(buttonText);
+            if (contatore === 1) {
+              idPremioSinistra = idElemento;
+              premioSinistra = buttonText;
+            }
+            if (contatore === 2) {
+              idPremioDestra = idElemento;
+              premioDestra = buttonText;
+              continue;
+            }
+          }
+        }
+      }
+
+      //console.log("premio di Sinistra " + premioSinistra + " " + idPremioSinistra);
+
+      var button = document.createElement('button');
+      button.textContent = premioSinistra;
+      button.setAttribute('id', 'premioSinistra');
+      button.setAttribute('class', 'btn premioSinistra');
+      button.setAttribute('onclick', 'win(this)');
+      button.style.position = 'absolute';
+      var coloresx = getComputedStyle(document.getElementById(idPremioSinistra)).backgroundColor;
+      //console.log(coloresx);
+      button.style.background = coloresx;
+      button.style.textAlign = 'right';
+      document.getElementById('gameContainer').appendChild(button);
+
+      //console.log("premio di Destra " + premioDestra + " " + idPremioDestra);
+
+      var button = document.createElement('button');
+      button.textContent = premioDestra;
+      button.setAttribute('id', 'premioDestra');
+      button.setAttribute('class', 'btn premioDestra');
+      button.setAttribute('onclick', 'win(this)');
+      button.style.position = 'absolute';
+      var coloredx = getComputedStyle(document.getElementById(idPremioDestra)).backgroundColor;
+      //console.log(coloredx);
+      button.style.background = coloredx;
+      button.style.textAlign = 'left';
+      document.getElementById('gameContainer').appendChild(button);
+
+
+      for (i = 1; i < 6; i++) {
+        var idElemento = 'lightBlue' + i;
+        button = document.getElementById(idElemento);
+        button.style.display = 'none';
+      }
+      for (i = 6; i < 11; i++) {
+        var idElemento = 'blue' + i;
+        button = document.getElementById(idElemento);
+        button.style.display = 'none';
+      }
+      for (i = 1; i < 11; i++) {
+        var idElemento = 'red' + i;
+        button = document.getElementById(idElemento);
+        button.style.display = 'none';
+      }
+
+    }
+
+    function win(e) {
+      var textBox = document.getElementById('myTextBox');
+      textBox.style.display = 'block';
+      textBox.value = e.textContent;
+      textBox.style.color = 'white';
+      textBox.style.background = e.style.background;
+    }
+
+    // Audio vari 
+    function playAudioLista() {
+      var audioLista = new Audio('audiolista.mp3');
+      audioLista.play();
+    }
+
+    function playAudioPaccoRosso() {
+      var audioPaccoRosso = new Audio('paccorosso.mp3');
+      audioPaccoRosso.play();
+    }
+
+    function playAudioPaccoBlu() {
+      var audioPaccoBlu = new Audio('paccoblu.mp3');
+      audioPaccoBlu.play();
+    }
+
+    function playAudioNonAccetto() {
+      var audioNonAccetto = new Audio('nonaccetto.mp3');
+      audioNonAccetto.play();
+    }
+
+    function checkKey(event) {
+      var keyCode = event.keyCode || event.which;
+
+      // Sequenza di tasti per mostrare/nascondere la casella di testo (Ctrl + Alt + U)
+      if (event.ctrlKey && event.altKey && keyCode === 85) {
+        toggleTextBox();
+      }
+
+      // Sequenza di tasti per cambiare lo stile del font (Ctrl + Alt + F)
+      if (event.ctrlKey && event.altKey && keyCode === 70) {
+        toggleFontStyle();
+      }
+    }
+
+    function toggleTextBox() {
+      var textBox = document.getElementById('myTextBox');
+      textBox.style.display = (textBox.style.display === 'none') ? 'block' : 'none';
+      if (textBox.style.display === 'none') {
+        textBox.value = 'OFFERTA';
+        textBox.style.color = 'white';
+        playAudioNonAccetto();
+      }
+    }
+
+    function toggleFontStyle() {
+      var textBox = document.getElementById('myTextBox');
+      var currentFontColor = textBox.style.color;
+      textBox.style.color = (currentFontColor === 'white') ? 'green' : 'white';
+    }
+
+  </script>
+
+  <input class="btn blue" type="file" name="readfile" id="readFileBlue" />
+  <input class="btn red" type="file" name="readfile" id="readFileRed" />
+  <input type="text" id="myTextBox" value="OFFERTA" style="display: none;">
+
+  <script>
+    var blueContent = new Array();
+    var redContent = new Array();
+    let fileBlue = document.getElementById("readFileBlue");
+    let fileRed = document.getElementById("readFileRed");
+    if (fileBlue) {
+      fileBlue.addEventListener("change", function () {
+        var reader = new FileReader();
+        reader.onload = function (progressEvent) {
+          //console.log(this.result);
+          var text = this.result;
+          while (text.length > 1) {
+            var tmp = text.substring(0, text.indexOf("\r\n"));
+            text = text.substring(text.indexOf("\r\n") + 2);
+            //console.log(tmp);
+            blueContent.push(tmp);
+            //console.log(blueContent);
+          }
+          startBlueBtn();
+          document.getElementById("readFileBlue").style.display = "none";
+        }
+        reader.readAsText(this.files[0]);
+      })
+    }
+
+    if (fileRed) {
+      fileRed.addEventListener("change", function () {
+        var reader = new FileReader();
+        reader.onload = function (progressEvent) {
+          //console.log(this.result);
+          var text = this.result;
+          while (text.length > 1) {
+            var tmp = text.substring(0, text.indexOf("\r\n"));
+            text = text.substring(text.indexOf("\r\n") + 2);
+            // console.log(tmp); 
+            redContent.push(tmp);
+            // console.log(redContent);
+          }
+          startRedBtn();
+          document.getElementById("readFileRed").style.display = "none";
+        }
+        reader.readAsText(this.files[0]);
+      })
+    }
+
+  </script>
+  <div id="gameContainer">
+
+  </div>
+</body>
+
+</html>
